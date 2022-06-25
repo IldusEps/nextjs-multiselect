@@ -20,15 +20,25 @@ export default function Main() {
                 else if (value[i] == 'Цветные металлы')
                     data.push(...items.colorMet);
             }
+
         setLabelsCategory1(data);
-        setCategory1([]);
-        setLabelsCategory2([]);
-        setCategory2([]);
+        if (category1.length != 0) {
+            const catg1 = category1.map((item) => {
+                for (let i = 0; i < data.length; i++) {
+                    if (item == data[i].value)
+                        return item;
+                }
+            })
+            setCategory1(catg1);
+
+            if (category2.length != 0)
+                onChangeCategory1(catg1);
+        }
     }
 
     function materialAdd(array, line) {
         return array.map(function (item) {
-            return {label: item.label + ` (${line})`, value: item.value + line}
+            return {label: item.label + ` (${line})`, value: item.value + ` (${line})`}
         })
     }
 
@@ -53,8 +63,15 @@ export default function Main() {
                     data.push(...materialAdd(items.titanItems, 'Титан'));
             }
         }
+
         setLabelsCategory2(data);
-        setCategory2([]);
+        if (category2.length != 0)
+            setCategory2(category2.map((item) => {
+                for (let i = 0; i < data.length; i++) {
+                    if (item == data[i].value)
+                        return item;
+                }
+            }));
     }
 
     return (
