@@ -11,7 +11,7 @@ export default function Main() {
     const [category2, setCategory2] = useState([]);
 
     const onChangeCategory = (value) => {
-        setCategory(value)
+        setCategory(value);
         let data = [];
         if (value != [])
             for (let i = 0; i < value.length; i++) {
@@ -23,10 +23,10 @@ export default function Main() {
 
         setLabelsCategory1(data);
         if (category1.length != 0) {
-            const catg1 = category1.map((item) => {
+            const catg1 = category1.filter((item) => {
                 for (let i = 0; i < data.length; i++) {
                     if (item == data[i].value)
-                        return item;
+                        return true;
                 }
             })
             setCategory1(catg1);
@@ -66,10 +66,10 @@ export default function Main() {
 
         setLabelsCategory2(data);
         if (category2.length != 0)
-            setCategory2(category2.map((item) => {
+            setCategory2(category2.filter((item) => {
                 for (let i = 0; i < data.length; i++) {
                     if (item == data[i].value)
-                        return item;
+                        return true;
                 }
             }));
     }
